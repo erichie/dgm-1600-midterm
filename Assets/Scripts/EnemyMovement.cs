@@ -8,6 +8,11 @@ public class EnemyMovement : MonoBehaviour {
      * A public float for the speed
      * A public float for the direction
      */
+
+	private Rigidbody rb;
+
+	public float speed;
+	public float direction;
 	
 	/*
      * The Start function:
@@ -15,12 +20,20 @@ public class EnemyMovement : MonoBehaviour {
      * Create a new Vector3 value for the direction variable with X and Z being zero and Y being a Random number between 0 and 360.
      * Assign the direction to the eulerAngles of this GameObject in order to rotate this GameObject
      */
+	void Start() {
+		rb = GetComponent<Rigidbody>();
+		Vector3 direction = new Vector3 (0, Random.Range (0, 360), 0);
+		transform.eulerAngles = direction;
+	}
 	
 	
 	/*
      * The Update function:
      * Using the Rigidbody variable use AddRelativeForce and pass the forward direction times the speed as parameters
      */
+	void Update() {
+		rb.AddRelativeForce (transform.forward * speed);
+	}
 	
 	
 	/* **************Explanation and Hints************

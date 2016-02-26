@@ -6,17 +6,28 @@ public class Timer : MonoBehaviour {
      * Variables:
      * A public float for the amount of time
      */
+	public float time;
 	
 	/*
      * The Update function:
      * Call the check timer function
      */
-	
+	void Update() {
+		checkTimer ();
+	}
+
 	/*
      * The check timer function:
      * Subtract the time variable with Time.deltaTime and assign it back into the time variable
      * If the time variable is less than zero then destroy this GameObject
      */
+	float checkTimer() {
+		time = time - Time.deltaTime;
+		if (time < 0) {
+			Destroy(gameObject);
+		}
+		return time;
+	}
 	
 	/* **************Explanation and Hints************
      * deltaTime - deltaTime will give you the time that has passed since the last frame was rendered.

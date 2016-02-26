@@ -9,6 +9,12 @@ public class EnemyDamage : MonoBehaviour
      * If the tag of the Collision parameter equals the KillZone tag then
      *      Destroy this GameObject
      */
+
+	void OnCollisionEnter(Collision collision) {
+		if (collision.gameObject.CompareTag ("killzone")) {
+			Destroy (gameObject);
+		}
+	}
 	
 	/* **************Explanation and Hints************
      * OnCollisionEnter - This is a special Unity function. It runs whenever a GameObject with rigidbody attached to it

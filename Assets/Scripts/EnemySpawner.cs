@@ -7,12 +7,20 @@ public class EnemySpawner : MonoBehaviour {
      * A public array of GameObjects that holds the references to the enemy prefabs
      * A private float for the invoking delay
      */
+
+	public GameObject[] enemies;
+
+	private float delay;
 	
 	/*
      * The Start function:
      * Assign a value to the delay variable
      * Use InvokeRepeating to repeatedly call the spawn function. Put the name of the spawn function, 0, and the delay variable as parameters
      */
+	void Start() {
+		delay = 1.0f;
+		InvokeRepeating ("spawnEnemy", 0, delay);
+	}
 	
 	/*
      * A function for spawning the enemies:
@@ -23,6 +31,15 @@ public class EnemySpawner : MonoBehaviour {
      *      Instantiate the current enemy using the Vector3 variable and Quaternion.identity
      *      Increment the index variable
      */
+	void spawnEnemy() {
+		int index = 0;
+		while (index < enemies.Length) {
+			Vector3 enemyPosition = new Vector3(index, enemies[index].transform.position.y, enemies[index].transform.position.z);
+			Instantiate(enemies[index], enemyPosition, Quaternion.identity);
+			index++;
+		}
+
+	}
 	
 	/* **************Explanation and Hints************
      * GameObject - They are the objects placed in a scene such as a Cube or an Empty Object. We also
