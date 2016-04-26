@@ -8,6 +8,7 @@ public class PlayerControl : MonoBehaviour {
 	// Public variables
 	public float rotateSpeed = 4.0f;
 	public float moveSpeed = 10.0f;
+	public GameObject bullet;
 
 	void Start() {
 		rb = GetComponent<Rigidbody>();
@@ -23,5 +24,10 @@ public class PlayerControl : MonoBehaviour {
 		if (Input.GetKey (KeyCode.UpArrow)) {
 			rb.AddRelativeForce(0, 0, moveSpeed);
 		}
+
+		if (Input.GetKeyDown (KeyCode.Space)) {
+			Instantiate(bullet, transform.position, transform.rotation);
+		}
+
 	}
  }

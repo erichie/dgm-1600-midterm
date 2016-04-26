@@ -10,6 +10,8 @@ public class EnemyMovement : MonoBehaviour {
      */
 
 	private Rigidbody rb;
+	private GameObject player;
+	private EnemyDamage enemyDmg;
 
 	public float speed;
 	public float direction;
@@ -21,9 +23,13 @@ public class EnemyMovement : MonoBehaviour {
      * Assign the direction to the eulerAngles of this GameObject in order to rotate this GameObject
      */
 	void Start() {
+		player = GameObject.FindGameObjectWithTag ("Player");
+		enemyDmg = GetComponent<EnemyDamage> ();
 		rb = GetComponent<Rigidbody>();
-		Vector3 direction = new Vector3 (0, Random.Range (0, 360), 0);
-		transform.eulerAngles = direction;
+		if (enemyDmg.enemyType == EnemyDamage.Enemies.Weak) {
+			Vector3 direction = new Vector3 (0, Random.Range (0, 360), 0);
+			transform.eulerAngles = direction;
+		}
 	}
 	
 	
@@ -33,6 +39,9 @@ public class EnemyMovement : MonoBehaviour {
      */
 	void Update() {
 		rb.AddRelativeForce (transform.forward * speed);
+		if (enemyDmg.enemyType == EnemyDamage.Enemies.Strong || enemyDmg.enemyType == EnemyDamage.Enemies.SuperStrong) {
+			transform.LookAt(player.transform);
+		}
 	}
 	
 	

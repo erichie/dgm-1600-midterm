@@ -4,15 +4,20 @@ using UnityEngine.UI;
 
 public class EnemyDamage : MonoBehaviour
 {
-	/*
-     * The OnCollisionEnter function:
-     * If the tag of the Collision parameter equals the KillZone tag then
-     *      Destroy this GameObject
-     */
+	public enum Enemies {Weak, Strong, SuperStrong};
+	public Enemies enemyType;
+	public int enemyHealth;
 
 	void OnCollisionEnter(Collision collision) {
 		if (collision.gameObject.CompareTag ("killzone")) {
 			Destroy (gameObject);
+		}
+	}
+
+	public void doDamage(int damage) {
+		enemyHealth = enemyHealth - damage;
+		if (enemyHealth < 0) {
+			Destroy(gameObject);
 		}
 	}
 	
